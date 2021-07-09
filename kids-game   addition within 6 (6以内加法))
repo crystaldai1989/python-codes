@@ -1,0 +1,25 @@
+## numbers addition within 6+ chinese warning 6以内加法
+
+import random
+import time
+def calculator():
+    while True:
+        a=random.randint(0,6)
+        b=random.randint(0,6)
+        result=a+b
+        answer=input('{}+{}='.format(a,b))
+        if answer !=0:
+            print('这个答案对不对呢??')
+            time.sleep(3)
+            if str(answer)==str(result):
+                print('回答正确!你太棒啦!开始下一题!')
+                calculator()
+            else:
+                print('回答不对哦~~正确答案是{}'.format(result))
+                print('再玩一题吧!')
+                calculator()
+        else:
+            print('要写数字哦~~')
+            calculator()
+calculator()
+
