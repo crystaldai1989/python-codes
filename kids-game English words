@@ -1,0 +1,49 @@
+import linecache
+import random
+import time
+import os
+
+def word_game():
+    file_path = r'D:\py\cindy\words.txt'
+    #得出行数
+    with open(file_path, 'rt',encoding='utf-8') as rstream:
+        count = len(rstream.readlines())
+    #取单词
+    i = random.randint(0, count-1)
+    word = linecache.getline(file_path, i).strip()
+    #区分中英文
+    space_position=word.find(' ')
+    english=word[:space_position-1]
+    chinese=word[space_position:]
+    #去字母
+    position=random.randint(0,len(english)-1)
+    piece1=word[:position]
+    piece2='_'+word[position+1:]
+    print(piece1+piece2)
+
+    #回答问题
+    answer=input('不见的字母是什么?')
+    time.sleep(2)
+    if answer==word[position]:
+        print('{}，回答正确!'.format(word))
+        word_game()
+    else:
+        print('答错了，正确单词是{}'.format(word))
+        word_game()
+
+def add_word():
+    while True:
+        word=input('请输入单词(停止输入，按q)')
+        if word=='q':
+            break
+        else:
+            with open(r'D:\py\cindy\words.txt','a') as wstream:
+                wstream.write('\n{}'.format(word))
+            print('单词添加成功')
+add=input('要添加新单词吗？ y/n:')
+if add=='y':
+    add_word()
+if add=='n':
+    word_game()
+
+
