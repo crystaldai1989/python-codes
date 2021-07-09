@@ -1,0 +1,39 @@
+import os
+path1= r'D:/camera_picture/original'
+path2=r'D:/camera_picture/copy'
+
+def copy(path1, path2):
+    if os.path.isdir(path1) and os.path.isdir(path2):
+        filelist=os.listdir(path1)
+
+        for file in filelist:
+            path=os.path.join(path1,file)
+            if os.path.isdir(path):
+                copy(path,path2)
+            else:
+                with open(path,'rb') as rstream:
+                    copys=rstream.read()
+                    path_new=os.path.join(path2,file)
+                    with open(path_new,'wb') as wstream:
+                        wstream.write(copys)
+                        print('{}复制完毕'.format(path_new))
+        else:
+            print('复制完毕')
+
+copy(path1, path2)
+
+
+#删除ARW和 THM
+def delete():
+    path2 = r'D:/camera_picture/copy'
+    if os.path.isdir(path2):
+        filelist2=os.listdir(path2)
+        for file_check in filelist2:
+            path_delete = os.path.join(path2, file_check)
+            if path_delete.endswith('MP4') or path_delete.endswith('JPG'):
+                pass
+            else:
+                os.remove(path_delete)
+                print('{}文件已经删除'.format(path_delete))
+delete()
+
